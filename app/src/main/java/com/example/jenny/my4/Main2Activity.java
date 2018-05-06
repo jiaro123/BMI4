@@ -1,20 +1,18 @@
 package com.example.jenny.my4;
 
-import android.support.v7.app.AppCompatActivity;
-import java.text.DecimalFormat;
-import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-public class ResultActivity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity {
     Bundle bundle;
     Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.activity_main2);
         intent = this.getIntent();
         bundle = intent.getExtras();
         String Sex = bundle.getString("Sex");
@@ -26,26 +24,26 @@ public class ResultActivity extends AppCompatActivity {
         tvBMI.setText(BMI_result);
         TextView tvAdvice = (TextView) findViewById(R.id.tvAdvice);
         tvAdvice.setText(BMI_advice);
-        Button b1 = (Button) findViewById(R.id.button1);
-        b1.setOnClickListener(new Button.OnClickListener() {
+        Button b2 = (Button) findViewById(R.id.button2);
+        b2.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-                ResultActivity.this.setResult(RESULT_OK, intent);
+                Main2Activity.this.setResult(RESULT_OK, intent);
 
-                ResultActivity.this.finish();
+                Main2Activity.this.finish();
             }
         });
     }
     // BMI值格式化
     private String format(double num) {
-        DecimalFormat df = new DecimalFormat("0.00");
-        return df.format(num);
+
+        return String.format("%.2f",num);
 
     }
     // 取得BMI值
     private String getBMI(double height, double weight) {
         double bmi = weight / (height*height);
-        return this.getString(R.string.report_result) + format(bmi);
+        return this.getString(R.string.report_result)+format(bmi);
 
     }
     // 依BMI值取得建議
@@ -65,6 +63,7 @@ public class ResultActivity extends AppCompatActivity {
             return getString(R.string.advice_light);
         } else {
             return getString(R.string.advice_average);
+
         }
     }
 }
